@@ -80,13 +80,13 @@ class SimpleRSS
 		@@feed_tags.each do |tag|
 			if feed_content && feed_content =~ %r{<(rss:|atom:)#{tag}(.*?)>(.*?)</(rss:|atom:)#{tag}>}mi
 				nil
-			elsif feed_content && feed_content =~ %r{<#{tag}(.*?)>(.*?)</#{tag}>}mi
+			elsif feed_content && feed_content =~ %r{<()#{tag}(.*?)>(.*?)</()#{tag}>}mi
 				nil
 			elsif feed_content && feed_content =~ %r{<(rss:|atom:)?#{tag}(.*?)\/\s*>}mi
 				nil
 			elsif @source =~ %r{<(rss:|atom:)#{tag}(.*?)>(.*?)</(rss:|atom:)#{tag}>}mi
 				nil
-			elsif @source =~ %r{<#{tag}(.*?)>(.*?)</#{tag}>}mi
+			elsif @source =~ %r{<()#{tag}(.*?)>(.*?)</()#{tag}>}mi
 				nil
 			elsif @source =~ %r{<(rss:|atom:)?#{tag}(.*?)\/\s*>}mi
 				nil
