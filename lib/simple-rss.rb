@@ -78,11 +78,15 @@ class SimpleRSS
 		feed_content = $1 if @source =~ %r{(.*?)<(rss:|atom:)?(item|entry).*?>.*?</(rss:|atom:)?(item|entry)>}mi
 		
 		@@feed_tags.each do |tag|
-			if feed_content && feed_content =~ %r{<(rss:|atom:)?#{tag}(.*?)>(.*?)</(rss:|atom:)?#{tag}>}mi
+			if feed_content && feed_content =~ %r{<(rss:|atom:)#{tag}(.*?)>(.*?)</(rss:|atom:)#{tag}>}mi
+				nil
+			if feed_content && feed_content =~ %r{<#{tag}(.*?)>(.*?)</#{tag}>}mi
 				nil
 			elsif feed_content && feed_content =~ %r{<(rss:|atom:)?#{tag}(.*?)\/\s*>}mi
 				nil
-			elsif @source =~ %r{<(rss:|atom:)?#{tag}(.*?)>(.*?)</(rss:|atom:)?#{tag}>}mi
+			elsif @source =~ %r{<(rss:|atom:)#{tag}(.*?)>(.*?)</(rss:|atom:)#{tag}>}mi
+				nil
+			elsif @source =~ %r{<#{tag}(.*?)>(.*?)</#{tag}>}mi
 				nil
 			elsif @source =~ %r{<(rss:|atom:)?#{tag}(.*?)\/\s*>}mi
 				nil
